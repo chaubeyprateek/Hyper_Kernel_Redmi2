@@ -590,6 +590,9 @@ static struct snd_kcontrol_new msm_voice_controls[] = {
 				msm_voice_tty_mode_put),
 	SOC_SINGLE_MULTI_EXT("Slowtalk Enable", SND_SOC_NOPM, 0, VSID_MAX, 0, 2,
 				NULL, msm_voice_slowtalk_put),
+#ifdef CONFIG_JALEBI_SUPPORT_STEREO_RECORD
+	SOC_SINGLE_EXT("Stereo Recording", SND_SOC_NOPM, 1, VSID_MAX, 0, NULL, NULL),
+#endif
 	SOC_SINGLE_MULTI_EXT("Voice Topology Disable", SND_SOC_NOPM, 0,
 			     VSID_MAX, 0, 2, NULL,
 			     msm_voice_topology_disable_put),

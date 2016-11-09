@@ -3,6 +3,10 @@ menu "MSM SoC Audio support"
 config SND_MSM_SOC_MSM7K
 	 tristate
 
+config JALEBI_SUPPORT_STEREO_RECORD
+	tristate "Simple Code to enable stereo recording support for jalebi"
+	default y
+
 config SND_MSM_SOC
 	tristate "SoC Audio for the MSM series chips"
 	depends on ARCH_MSM7X27

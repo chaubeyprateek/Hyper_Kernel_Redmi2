@@ -4187,8 +4187,12 @@ static int voice_cvs_start_record(struct voice_data *v, uint32_t rec_mode)
 		cvs_start_record.hdr.opcode = VSS_IRECORD_CMD_START;
 
 		cvs_start_record.rec_mode.port_id =
+#ifdef CONFIG_JALEBI_SUPPORT_STEREO_RECORD
+					VSS_IRECORD_PORT_ID_TX_RX;
+#else
 					VSS_IRECORD_PORT_ID_DEFAULT;
-		if (rec_mode == VOC_REC_UPLINK) {
+#endif	
+	if (rec_mode == VOC_REC_UPLINK) {
 			cvs_start_record.rec_mode.rx_tap_point =
 					VSS_IRECORD_TAP_POINT_NONE;
 			cvs_start_record.rec_mode.tx_tap_point =
@@ -4210,7 +4214,9 @@ static int voice_cvs_start_record(struct voice_data *v, uint32_t rec_mode)
 			ret = -EINVAL;
 			goto fail;
 		}
-
+#ifdef CONFIG_JALEBI_SUPPORT_STEREO_RECORD
+		cvs_start_record.rec_mode.mode = VSS_IRECORD_MODE_TX_RX_STEREO;
+#endif
 		v->cvs_state = CMD_STATUS_FAIL;
 
 		ret = apr_send_pkt(apr_cvs, (uint32_t *) &cvs_start_record);
