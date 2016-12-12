@@ -12,7 +12,7 @@ clear
 
 # Resources
 THREAD="-j$(grep -c ^processor /proc/cpuinfo)"
-DEFCONFIG="hydrogen_user_defconfig"
+DEFCONFIG="cyanogenmod_wt88047_defconfig"
 KERNEL="Image"
 
 #Hyper Kernel Details
@@ -21,22 +21,22 @@ VER="-v1-$(date +"%Y-%m-%d"-%H%M)-"
 Hyper_VER="$BASE_VER$VER$TC"
 
 # Vars
-export ARCH=arm64
-export SUBARCH=arm64
-export KBUILD_BUILD_USER=Karthick111
-export KBUILD_BUILD_HOST=server1
-export LOCALVERSION="-Hyper™-v1"
+export ARCH=arm
+export SUBARCH=arm
+export KBUILD_BUILD_USER=chaubeyprateek
+export KBUILD_BUILD_HOST=server
+export LOCALVERSION="-Hyper™"
 
 # Paths
 KERNEL_DIR=`pwd`
-RESOURCE_DIR="/home/android/kernel/hydrogen"
+RESOURCE_DIR="/home/android/kernel/wt88047"
 ANYKERNEL_DIR="$RESOURCE_DIR/hyper"
 TOOLCHAIN_DIR="/home/android/kernel/tc"
 REPACK_DIR="$ANYKERNEL_DIR"
 PATCH_DIR="$ANYKERNEL_DIR/patch"
 MODULES_DIR="$ANYKERNEL_DIR/modules"
 ZIP_MOVE="$RESOURCE_DIR/kernel_out"
-ZIMAGE_DIR="$KERNEL_DIR/arch/arm64/boot"
+ZIMAGE_DIR="$KERNEL_DIR/arch/arm/boot"
 
 # Functions
 function make_kernel {
@@ -56,8 +56,8 @@ function make_modules {
 }
 
 function make_dtb {
-		$KERNEL_DIR/dtbToolCM -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
-		cp -vr $KERNEL_DIR/arch/arm64/boot/dt.img $REPACK_DIR/dtb
+		$KERNEL_DIR/dtbToolCM -2 -o $KERNEL_DIR/arch/arm/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
+		cp -vr $KERNEL_DIR/arch/arm/boot/dt.img $REPACK_DIR/dtb
 }
 
 function make_zip {
@@ -88,9 +88,9 @@ UBERTC-4.9---->(2)
 do
 case "$echoice" in
 	1 )
-		export CROSS_COMPILE=$TOOLCHAIN_DIR/saber-4.9/bin/aarch64-
+		export CROSS_COMPILE=$TOOLCHAIN_DIR/saber-4.9/bin/arm-eabi-
 		export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/saber-4.9/lib/
-		STRIP=$TOOLCHAIN_DIR/saber-4.9/bin/aarch64-strip
+		STRIP=$TOOLCHAIN_DIR/saber-4.9/bin/arm-eabi-
 		TC="SM"
 		rm -rf $MODULES_DIR/*
 		rm -rf $ZIP_MOVE/*
@@ -105,9 +105,9 @@ case "$echoice" in
 		break
 		;;
 	2 )
-		export CROSS_COMPILE=$TOOLCHAIN_DIR/uber-4.9/bin/aarch64-linux-android-
+		export CROSS_COMPILE=$TOOLCHAIN_DIR/uber-4.9/bin/arm-eabi-
 		export LD_LIBRARY_PATH=$TOOLCHAIN_DIR/uber-4.9/lib/
-		STRIP=$TOOLCHAIN_DIR/uber-4.9/bin/aarch64-linux-android-strip
+		STRIP=$TOOLCHAIN_DIR/uber-4.9/bin/arm-eabi-
 		TC="UB"
 		rm -rf $MODULES_DIR/*
 		rm -rf $ZIP_MOVE/*

@@ -62,22 +62,11 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.system)" == 1 ]; then
   cp -fr /tmp/anykernel/system/* /system/;
 fi;
 
-ui_print "Installing kernel...";
+ui_print "Installing Hyper kernel...";
 /sbin/sh /tmp/anykernel/anykernel.sh;
 if [ "$(cat /tmp/anykernel/exitcode)" == 1 ]; then 
   umount /system;
   abort;
-fi;
-
-if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
-  ui_print "Pushing modules...";
-  ui_print " ";
-  rm -rf /system/lib/modules;
-  rm -rf /system/vendor/lib/hw/power.msm8952.so;
-  rm -rf /system/vendor/lib64/hw/power.msm8952.so;
-  mkdir /system/lib/modules;
-  cp -f /tmp/anykernel/modules/* /system/lib/modules/;
-  set_perm_recursive 0 0 0755 0644 /system/lib/modules;
 fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.cleanup)" == 1 ]; then

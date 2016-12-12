@@ -3,13 +3,13 @@
 
 ## AnyKernel setup
 # EDIFY properties
-do.devicecheck=1
+do.devicecheck=0
 do.system=0
 do.initd=0
-do.modules=1
+do.modules=0
 do.cleanup=1
-device.name1=hydrogen
-device.name2=helium
+device.name1=
+device.name2=
 device.name3=
 device.name4=
 device.name5=
