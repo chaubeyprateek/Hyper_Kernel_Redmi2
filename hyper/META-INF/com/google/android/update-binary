@@ -58,11 +58,11 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
 fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.system)" == 1 ]; then
-  ui_print "Pushing System files...";
+  ui_print "Installing Hyper Kernel...";
   cp -fr /tmp/anykernel/system/* /system/;
 fi;
 
-ui_print "Installing Hyper kernel...";
+ui_print "Reboot And Enjoy...";
 /sbin/sh /tmp/anykernel/anykernel.sh;
 if [ "$(cat /tmp/anykernel/exitcode)" == 1 ]; then 
   umount /system;
