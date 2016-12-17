@@ -168,4 +168,5 @@ echo "Time: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 echo " "
 cd $ZIP_MOVE
 ls
-ftp uploads.androidfilehost.com
+#ftp uploads.androidfilehost.com
+
