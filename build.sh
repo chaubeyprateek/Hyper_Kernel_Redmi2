@@ -17,7 +17,7 @@ KERNEL="Image"
 
 #Hyper Kernel Details
 BASE_VER="Hyper"
-VER="-v1-$(date +"%Y-%m-%d"-%H%M)-"
+VER="-v1.2-$(date +"%Y-%m-%d"-%H%M)-"
 Hyper_VER="$BASE_VER$VER$TC"
 
 # Vars
@@ -29,9 +29,9 @@ export LOCALVERSION="-Hyper™"
 
 # Paths
 KERNEL_DIR=`pwd`
-RESOURCE_DIR="/home/android/kernel/wt88047"
+RESOURCE_DIR="/home/prateek/kernel/wt88047"
 ANYKERNEL_DIR="$RESOURCE_DIR/hyper"
-TOOLCHAIN_DIR="/home/android/kernel/tc"
+TOOLCHAIN_DIR="/home/prateek/kernel/tc"
 REPACK_DIR="$ANYKERNEL_DIR"
 PATCH_DIR="$ANYKERNEL_DIR/patch"
 MODULES_DIR="$ANYKERNEL_DIR/modules"
@@ -46,14 +46,14 @@ function make_kernel {
 		cp -vr $ZIMAGE_DIR/$KERNEL $REPACK_DIR/zImage
 }
 
-function make_modules {
-		cd $KERNEL_DIR
-		make modules $THREAD
-		find $KERNEL_DIR -name '*.ko' -exec cp {} $MODULES_DIR/ \;
-		cd $MODULES_DIR
-        $STRIP --strip-unneeded *.ko
-        cd $KERNEL_DIR
-}
+#function make_modules {
+#		cd $KERNEL_DIR
+#		make modules $THREAD
+#		find $KERNEL_DIR -name '*.ko' -exec cp {} $MODULES_DIR/ \;
+#		cd $MODULES_DIR
+#        $STRIP --strip-unneeded *.ko
+#        cd $KERNEL_DIR
+#}
 
 function make_dtb {
 		$KERNEL_DIR/dtbToolCM -2 -o $KERNEL_DIR/arch/arm/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
@@ -143,7 +143,6 @@ case "$dchoice" in
 	y|Y )
 		make_kernel
 		make_dtb
-		make_modules
 		make_zip
 		break
 		;;
